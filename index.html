@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Racha Uz Pandaz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            color: black;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: white; /* Cabeçalho branco */
+            color: black; /* Cor do texto */
+            padding: 20px 0; /* Aumenta o padding do cabeçalho */
+            text-align: center;
+            position: relative;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra para dar profundidade */
+        }
+
+        .logo-container {
+            display: flex;
+            justify-content: center; /* Centraliza horizontalmente */
+            align-items: center; /* Centraliza verticalmente */
+        }
+
+        #navbar {
+            display: flex; /* Exibe o menu como um flex container */
+            flex-direction: row; /* Alinha os itens em linha */
+            justify-content: center; /* Centraliza horizontalmente */
+            background-color: #34495e; /* Cor de fundo do menu */
+            position: relative; /* Ajuste para o posicionamento do menu */
+            z-index: 1;
+        }
+
+        #navbar a {
+            color: white; /* Cor do texto do menu */
+            padding: 15px;
+            text-decoration: none;
+            text-align: center;
+            transition: background-color 0.3s; /* Transição suave para a cor de fundo */
+        }
+
+        #navbar a:hover {
+            background-color: #2980b9; /* Cor ao passar o mouse */
+        }
+
+        .menu-toggle {
+            display: none; /* Esconde por padrão */
+            cursor: pointer;
+            font-size: 20px;
+            background-color: white; /* Cor do botão do menu */
+            color: black; /* Cor do texto do botão */
+            border: 2px solid #2980b9; /* Borda azul */
+            padding: 10px;
+            transition: transform 0.2s; /* Efeito ao botão */
+            border-radius: 5px; /* Bordas arredondadas */
+            position: absolute; /* Para posicionar próximo à logo */
+            top: 20px; /* Ajusta a posição do botão */
+            right: 20px; /* Ajusta a posição do botão */
+        }
+
+        .menu-toggle:hover {
+            transform: scale(1.05); /* Efeito de aumento ao passar o mouse */
+            background-color: #2980b9; /* Mudança de cor ao passar o mouse */
+            color: white; /* Cor do texto ao passar o mouse */
+        }
+
+        section {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .ranking-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .galeria {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 0 -10px; /* Margens negativas para ajuste de espaçamento */
+        }
+
+        .galeria img {
+            width: 150px; /* Tamanho fixo das imagens */
+            height: auto; /* Mantém a proporção da imagem */
+            margin: 10px;
+            cursor: pointer;
+            border-radius: 50%; /* Bordas arredondadas */
+            transition: transform 0.2s;
+        }
+
+        .galeria img:hover {
+            transform: scale(1.1);
+        }
+
+        footer {
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8);
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.3s ease; /* Transição suave para o modal */
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px; /* Bordas arredondadas para a imagem do modal */
+        }
+
+        .close {
+            color: white;
+            font-size: 30px;
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            cursor: pointer;
+        }
+
+        #melhor-time {
+            margin: 20px 0;
+        }
+
+        /* Estilo da imagem do melhor time */
+        #melhor-time img {
+            max-width: 90%; /* Ajuste o tamanho ideal */
+            height: auto; /* Mantém a proporção */
+            border-radius: 10px; /* Bordas arredondadas */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para destaque */
+        }
+
+        /* Estilos para dispositivos móveis */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block; /* Exibe o botão do menu em telas pequenas */
+            }
+
+            #navbar {
+                display: none; /* Esconde o navbar por padrão em mobile */
+                flex-direction: column; /* Coloca os itens em coluna */
+                background-color: #34495e; /* Cor de fundo do menu */
+                position: absolute; /* Ajuste para aparecer em cima do conteúdo */
+                top: 70px; /* Posição logo abaixo do cabeçalho */
+                left: 0; /* Largura total */
+                width: 100%; /* Navbar ocupa a largura total em telas pequenas */
+            }
+
+            header {
+                padding: 5px 0; /* Reduzir o padding do header em telas pequenas */
+            }
+
+            #melhor-time img {
+                width: 80%; /* Ajuste para dispositivos menores */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .galeria img {
+                width: 100px; /* Tamanho ainda menor das imagens em telas pequenas */
+            }
+
+            header {
+                padding: 10px 0; /* Aumentar o padding do header em telas muito pequenas */
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo-container">
+        <img src="https://github.com/diogenesabreu/img/blob/main/racha-removebg-preview.png?raw=true" alt="Logo do Racha Uz Pandaz" style="max-width: 150px;">
+    </div>
+    <button class="menu-toggle" onclick="toggleMenu(event)">☰</button>
+</header>
+
+<nav id="navbar">
+    <a href="#sobre-nos">Sobre Nós</a>
+    <a href="#galeria">Galeria</a>
+    <a href="#ranking-artilharia">Ranking Artilharia</a>
+    <a href="#ranking-goleiro">Ranking Melhor Goleiro</a>
+    <a href="#melhor-time">Melhor Time da Semana</a>
+</nav>
+
+<section id="sobre-nos">
+    <h2>Sobre Nós</h2>
+    <p>Bem-vindo ao Racha Uz Pandaz, o melhor lugar para jogar futebol com os amigos!</p>
+</section>
+
+<section id="galeria">
+    <h2>Galeria</h2>
+    <div class="galeria">
+        <img src="https://github.com/diogenesabreu/img/blob/main/imagem1.jpg?raw=true" alt="Imagem 1" onclick="openModal(this)">
+        <img src="https://github.com/diogenesabreu/img/blob/main/imagem2.jpg?raw=true" alt="Imagem 2" onclick="openModal(this)">
+        <img src="https://github.com/diogenesabreu/img/blob/main/imagem3.jpg?raw=true" alt="Imagem 3" onclick="openModal(this)">
+        <img src="https://github.com/diogenesabreu/img/blob/main/imagem4.jpg?raw=true" alt="Imagem 4" onclick="openModal(this)">
+        <img src="https://github.com/diogenesabreu/img/blob/main/imagem5.jpg?raw=true" alt="Imagem 5" onclick="openModal(this)">
+        <img src="https://github.com/diogenesabreu/img/blob/main/imagem6.jpg?raw=true" alt="Imagem 6" onclick="openModal(this)">
+    </div>
+</section>
+
+<section id="ranking-artilharia">
+    <h2>Ranking Artilharia</h2>
+    <ul class="ranking-list">
+        <li>Jogador 1 - 10 Gols</li>
+        <li>Jogador 2 - 8 Gols</li>
+        <li>Jogador 3 - 6 Gols</li>
+    </ul>
+</section>
+
+<section id="ranking-goleiro">
+    <h2>Ranking Melhor Goleiro</h2>
+    <ul class="ranking-list">
+        <li>Goleiro 1 - 5 Defesas</li>
+        <li>Goleiro 2 - 4 Defesas</li>
+        <li>Goleiro 3 - 3 Defesas</li>
+    </ul>
+</section>
+
+<section id="melhor-time">
+    <h2>Melhor Time da Semana</h2>
+    <img src="https://github.com/diogenesabreu/img/blob/main/melhor_time.jpg?raw=true" alt="Melhor Time da Semana">
+</section>
+
+<footer>
+    <p>&copy; 2024 Racha Uz Pandaz. Todos os direitos reservados.</p>
+</footer>
+
+<!-- Modal -->
+<div id="myModal" class="modal" onclick="closeModal()">
+    <span class="close" onclick="closeModal(event)">&times;</span>
+    <img class="modal-content" id="img01">
+</div>
+
+<script>
+    function toggleMenu(event) {
+        const navbar = document.getElementById('navbar');
+        navbar.style.display = (navbar.style.display === "flex") ? "none" : "flex";
+        event.stopPropagation(); // Impede que o clique no botão feche o menu
+    }
+
+    // Fecha o menu se clicar fora dele
+    document.addEventListener('click', function(event) {
+        const navbar = document.getElementById('navbar');
+        const menuToggle = document.querySelector('.menu-toggle');
+
+        // Verifica se o clique foi fora do menu e do botão
+        if (!navbar.contains(event.target) && !menuToggle.contains(event.target)) {
+            navbar.style.display = 'none';
+        }
+    });
+
+    function openModal(img) {
+        const modal = document.getElementById("myModal");
+        const modalImg = document.getElementById("img01");
+        modal.style.display = "flex"; // Muda para flex
+        modalImg.src = img.src;
+    }
+
+    function closeModal(event) {
+        const modal = document.getElementById("myModal");
+        modal.style.display = "none";
+        event.stopPropagation(); // Impede que o clique no 'x' feche o menu
+    }
+</script>
+
+</body>
+</html>
